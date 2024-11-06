@@ -1,76 +1,28 @@
 import { Link, useLoaderData } from "react-router-dom"
 import { createClient } from 'contentful'
 import { useEffect, useState } from "react";
+import { useFetchProducts } from '../utils/fetchProducts'
+import data from '../data'
+
 
 
 const ProductsGrid = () => {
-    let imageURL;
-
-    const client = createClient({
-        accessToken: 's4HlIPhwB7x2gfGxt-CgVQ0mQvnN4RkQvXB2xEu8l28',
-        space: 'zpu537igy6hd',
-    })
-    const [product, setProduct] = useState([]);
-
-    const getData = async () => {
-        const res = await client.getEntries({ content_type: 'products' });
-        const product = res.items.map((item) => {
-            const { image, title } = item.fields;
-            const id = item.sys.id;
-            const img = image?.fields?.file?.url;
-            return { img, title, id }
-        });
-        setProduct(product)
-        // console.log(product)
-    }
-
-    useEffect(() => {
-        getData()
-    }, [])
-
-    // client.getEntries().then(function (entries) {
-    //     entries.items.forEach(function (entry) {
-    //         //console.log(entry)
-    //         imageURL = 'http://' + entry.fields.image.fields.file.url
-    //         console.log(imageURL)
-    //     }
-    //     )
-    // })
-    // getting a specific Post
-    // client
-    //     .getEntries({ 'sys.id': '10jOjKpdTYAYRVc197KlAs' })
-    //     .then((response) => {
-    //         console.log(response)
-    //     }).catch((err) => console.log(err))
-
-
-    const { products } = useLoaderData();
-    // const data = products.data
-    // console.log(products)
-
-
-    // const directusApi = 'https://comfy-store.directus.app/items/products/';
-    // const fileId = image;
-    // const accessToken = 'your-access-token';
-
-    // const imageUrl = `${directusApi}/assets/${fileId}?access_token=${accessToken}`;
-    // console.log(imageUrl);
+    const products = data;
 
     return (
+
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 '>
-            {product.map((prod) => {
-                const { img, title, id } = prod;
-                console.log(img, title)
+            {products.map((prod) => {
+                const { title, image } = prod;
                 return (
                     <Link
-                        key={id}
-                        to={`/products/${id}`}
+                        to={`/products`}
                         className='card w-full  shadow-xl hover:shadow-2xl transition duration-300 '
                     >
                         <figure className='px-4 pt-4'>
                             <img
-                                src={img}
-                                alt={title}
+                                src={image}
+                                alt='Elf'
                                 className='rounded-xl h-64 md:h-48 w-full object-cover'
                             />
                         </figure>
@@ -79,9 +31,7 @@ const ProductsGrid = () => {
 
                         </div>
                     </Link>
-
-                );
-
+                )
             })}
         </div>
 

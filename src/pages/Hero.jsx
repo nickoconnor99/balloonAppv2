@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import hero1 from '../assets/hero5.jpg';
-import hero2 from '../assets/hero6.jpg';
-import hero3 from '../assets/hero7.jpg';
-import hero4 from '../assets/hero8.jpg';
+import hero1 from '../assets/360080291_200675059594451_4048102465236019403_n.jpg';
+import hero2 from '../assets/397492507_267421149586508_6988846565487064728_n.jpg';
+import hero3 from '../assets/397526804_263713576623932_2944288645324919698_n.jpg';
 
-const carouselImages = [hero1, hero2, hero3, hero4]
+const carouselImages = [hero1, hero2, hero3]
 const Hero = () => {
     return (
         <div className=' grid grid-cols-1 lg:grid-cols-2 gap-24 items-center'>
